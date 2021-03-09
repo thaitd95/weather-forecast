@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import { getLocationReducer } from "../app/reducers";
+import createSagaMiddleware from 'redux-saga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    getLocation: getLocationReducer,
   },
+  middleware: applyMiddleware(sagaMiddleware)
 });
