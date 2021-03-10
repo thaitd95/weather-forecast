@@ -1,13 +1,12 @@
+import { isEmpty } from "lodash";
+import moment from "moment";
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
   GET_LOCATION,
-  GET_LOCATION_SUCCESS,
-  GET_LOCATION_ERROR,
-  GET_WEATHER,
+  GET_LOCATION_ERROR, GET_LOCATION_SUCCESS,
+  GET_WEATHER
 } from "../../actions";
-import { isEmpty } from "lodash";
 import { getLocationAPI } from "../../services/locationServices";
-import moment from "moment";
 
 export function* getLocation({
   type,

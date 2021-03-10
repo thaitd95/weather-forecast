@@ -1,9 +1,7 @@
-import { useEffect, useMemo } from "react";
-import WeatherCard from "../../components/WeatherCard";
+import { Input } from "antd";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { getLocation } from "../../actions";
-import { Input } from "antd";
-import { isEmpty } from "lodash";
 import WeatherList from "../../components/WeatherList";
 
 const { Search } = Input;
@@ -15,7 +13,7 @@ interface IProps {
 const ForecastList = ({ dispatch, props }: IProps) => {
   useEffect(() => {
     const req = {
-      name: "Ho Chi Minh",
+      name: "HoChiMinh",
     };
     dispatch(getLocation(req));
   }, []);
@@ -26,7 +24,6 @@ const ForecastList = ({ dispatch, props }: IProps) => {
     };
     dispatch(getLocation(req));
   };
-
 
   return (
     <div
@@ -52,10 +49,7 @@ const ForecastList = ({ dispatch, props }: IProps) => {
         style={{ width: 300, marginBottom: "10px" }}
       />
 
-      <div style={{ display: "flex" }}>
-        {/* <WeatherList data={props?.consolidated_weather}/> */}
-        {WeatherList({data: props?.consolidated_weather})}
-      </div>
+      <WeatherList data={props?.consolidated_weather} />
     </div>
   );
 };
