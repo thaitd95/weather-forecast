@@ -1,23 +1,34 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
-import { GET_LOCATION, GET_LOCATION_SUCCESS } from "../../actions";
-import { apiUrl } from "../../utils/getUrl";
-import axios from "axios";
+import { call, put, takeLatest } from "redux-saga/effects";
+import {
+  GET_LOCATION,
+  GET_LOCATION_SUCCESS,
+  GET_LOCATION_ERROR,
+  GET_WEATHER,
+} from "../../actions";
+import { isEmpty } from "lodash";
+import { getLocationAPI } from "../../services/locationServices";
+import moment from "moment";
 
 export function* getLocation({
   type,
-  lattLong,
+  payload,
 }: {
   type: string;
-  lattLong: any;
+  payload: any;
 }) {
-  const url = apiUrl("location/search");
-  const res = yield axios.get(apiUrl("location/search?lattlong=36.96,-122.02"));
-  console.log("url---", url);
-  // const endpoint =
-  //   "https://gist.githubusercontent.com/brunokrebs/f1cacbacd53be83940e1e85860b6c65b/raw/to-do-items.json";
-  // const response = yield call(fetch, endpoint);
-  // const data = yield response.json();
-  yield put({ type: GET_LOCATION_SUCCESS, toDoList: res.json() });
+  try {
+    const { name } = payload;
+    const { data } = yield call(getLocationAPI, name);
+    yield put({ type: GET_LOCATION_SUCCESS, data });
+    if (!isEmpty(data)) {
+      const { woeid } = data[0];
+      const date = moment().format("YYYY/MM/DD");
+      const payload = { woeid, date };
+      yield put({ type: GET_WEATHER, payload });
+    }
+  } catch (error) {
+    yield put({ type: GET_LOCATION_ERROR });
+  }
 }
 
 export function* getLocationSagas() {

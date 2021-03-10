@@ -1,27 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import WeatherCard from "../../components/WeatherCard";
 import { connect } from "react-redux";
 import { getLocation } from "../../actions";
+import { Input } from "antd";
+import { isEmpty } from "lodash";
+import WeatherList from "../../components/WeatherList";
+
+const { Search } = Input;
 interface IProps {
+  props: any;
   dispatch: any;
 }
 
-const ForecastList = ({ dispatch }: IProps) => {
+const ForecastList = ({ dispatch, props }: IProps) => {
   useEffect(() => {
-    const lattLong = "36.96,-122.02";
     const req = {
-      lattLong,
+      name: "Ho Chi Minh",
     };
     dispatch(getLocation(req));
   }, []);
 
-  const handleGetLocation = () => {
-    const lattLong = "36.96,-122.02";
+  const handleGetLocation = (value: string) => {
     const req = {
-      lattLong,
+      name: value,
     };
     dispatch(getLocation(req));
   };
+
 
   return (
     <div
@@ -40,16 +45,24 @@ const ForecastList = ({ dispatch }: IProps) => {
       >
         Weather Forecast
       </div>
-      <button onClick={handleGetLocation}>Click</button>
+
+      <Search
+        placeholder="Location"
+        onSearch={handleGetLocation}
+        style={{ width: 300, marginBottom: "10px" }}
+      />
+
       <div style={{ display: "flex" }}>
-        <WeatherCard />
-        <WeatherCard />
-        <WeatherCard />
-        <WeatherCard />
-        <WeatherCard />
+        {/* <WeatherList data={props?.consolidated_weather}/> */}
+        {WeatherList({data: props?.consolidated_weather})}
       </div>
     </div>
   );
 };
 
-export default connect()(ForecastList);
+const mapStateToProps = (state: any) => {
+  const { getWeather } = state;
+  return { props: getWeather };
+};
+
+export default connect(mapStateToProps)(ForecastList);

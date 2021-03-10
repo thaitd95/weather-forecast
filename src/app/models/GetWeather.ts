@@ -3,12 +3,11 @@ interface ForecastItem {
   weatherStateAbbr: string;
 }
 
-interface GetForecastRequest {
-
+interface GetWeatherRequest {
+  woeid: number;
+  date: string;
 }
 
-interface GetForecastResponse {
+interface GetWeatherResponse {}
 
-}
-
-export type { ForecastItem, GetForecastRequest, GetForecastResponse };
+export type { ForecastItem, GetWeatherRequest, GetWeatherResponse };

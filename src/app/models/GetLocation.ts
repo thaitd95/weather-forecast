@@ -1,5 +1,5 @@
 interface GetLocationRequest {
-  lattLong: any;
+  name: string;
 }
 
 interface GetLocationResponse {

@@ -1,11 +1,11 @@
 import { Button, Card } from "react-bootstrap";
 
 interface IProps {
-  date?: string;
-  data?: any;
+  item: any;
 }
 
-const WeatherCard = ({ date, data }: IProps) => {
+const WeatherCard = ({ item }: IProps) => {
+  console.log('---item-----',item)
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img
@@ -13,7 +13,7 @@ const WeatherCard = ({ date, data }: IProps) => {
         src="https://www.metaweather.com/static/img/weather/sn.svg"
       />
       <Card.Body>
-        <Card.Title>{date}</Card.Title>
+        <Card.Title>ABC</Card.Title>
         <Card.Text>
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
