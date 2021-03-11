@@ -1,4 +1,8 @@
-import { GET_LOCATION, GET_LOCATION_SUCCESS, GET_LOCATION_ERROR } from "../../actions";
+import {
+  GET_LOCATION,
+  GET_LOCATION_SUCCESS,
+  GET_LOCATION_ERROR,
+} from "../../actions";
 
 const initialState = {};
 
@@ -8,8 +12,7 @@ export default function getLocationReducer(state = initialState, action: any) {
       console.log("get location");
       return state;
     case GET_LOCATION_SUCCESS:
-      console.log("get success");
-      return state;
+      return { ...state, data: action.data };
     case GET_LOCATION_ERROR:
       console.log("get error");
       return state;

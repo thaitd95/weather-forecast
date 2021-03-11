@@ -1,14 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
-import ForecastList from "./app/containers/ForecatList";
 import "./App.css";
+import ForecastList from "./app/containers/ForecatList";
 
 function App() {
   return (
     <div className="App">
       <ForecastList />
-      {/* <Counter /> */}
     </div>
   );
 }
