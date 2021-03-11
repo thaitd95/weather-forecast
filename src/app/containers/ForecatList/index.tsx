@@ -13,7 +13,7 @@ interface IProps {
 const ForecastList = ({ dispatch, props }: IProps) => {
   useEffect(() => {
     const req = {
-      name: "HoChiMinh",
+      name: "London",
     };
     dispatch(getLocation(req));
   }, []);

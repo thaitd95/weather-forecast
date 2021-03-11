@@ -9,9 +9,9 @@ const WeatherList = (props: IProps) => {
   const { data = dumbData } = props;
   return (
     <div style={{ display: "flex" }}>
-      {data.map((item, index) => (
-        <WeatherCard key={index} item={item} />
-      ))}
+      {data
+        .map((item, index) => <WeatherCard key={index} item={item} />)
+        .filter((item, index) => index <= 4)}
     </div>
   );
 };
