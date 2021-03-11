@@ -17,17 +17,17 @@ const WeatherCard = ({ item }: IProps) => {
   const round = (value: number) => Math.round(value);
 
   const renderDate = (date: string) => {
-    const diff = moment(applicable_date).diff(moment().format('YYYY-MM-DD'), "days");
+    const diff = moment(date).diff(moment().format('YYYY-MM-DD'), "days");
     switch (diff) {
       case 0:
         return "Today";
       case 1:
         return "Tommorrow";
       default:
-        return moment(applicable_date).format("ddd DD MMM");
+        return moment(date).format("ddd DD MMM");
     }
   };
-  
+
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img
