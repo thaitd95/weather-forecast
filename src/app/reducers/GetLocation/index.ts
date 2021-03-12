@@ -9,13 +9,11 @@ const initialState = {};
 export default function getLocationReducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_LOCATION:
-      console.log("get location");
-      return state;
+      return { ...state, loading: true };
     case GET_LOCATION_SUCCESS:
-      return { ...state, data: action.data };
+      return { ...state, data: action.data, loading: false };
     case GET_LOCATION_ERROR:
-      console.log("get error");
-      return state;
+      return { ...state, loading: false };
     default:
       return state;
   }

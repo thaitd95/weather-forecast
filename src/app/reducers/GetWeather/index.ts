@@ -9,14 +9,11 @@ const initialState = {};
 export default function getWeatherReducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_WEATHER:
-      console.log("get weather");
-      return state;
+      return { ...state, loading: true };
     case GET_WEATHER_SUCCESS:
-      console.log("get weather success");
-      return { ...state, ...action.data };
+      return { ...state, ...action.data, loading: false };
     case GET_WEATHER_ERROR:
-      console.log("get weather error");
-      return state;
+      return { ...state, loading: false };
     default:
       return state;
   }

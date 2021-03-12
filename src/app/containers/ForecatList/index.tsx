@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getLocation } from "../../actions";
+import { getLocation, getWeather } from "../../actions";
 import WeatherList from "../../components/WeatherList";
 import moment from "moment";
 import NotFound from "../../components/NotFound";
@@ -27,7 +27,14 @@ const ForecastList = ({ dispatch, props }: IProps) => {
     };
     dispatch(getLocation(req));
   };
-  const { title, time, location } = props;
+
+  const {
+    title,
+    time,
+    location,
+    getWeatherLoading,
+    getLocationLoading,
+  } = props;
 
   return (
     <div
@@ -75,10 +82,13 @@ const ForecastList = ({ dispatch, props }: IProps) => {
             </div>
           </div>
 
-          <WeatherList data={props?.consolidated_weather} />
+          <WeatherList
+            data={props?.consolidated_weather}
+            loading={getWeatherLoading}
+          />
         </>
       ) : (
-        <NotFound/>
+        <NotFound />
       )}
     </div>
   );
@@ -86,7 +96,14 @@ const ForecastList = ({ dispatch, props }: IProps) => {
 
 const mapStateToProps = (state: any) => {
   const { getWeather, getLocation } = state;
-  return { props: { ...getWeather, location: getLocation.data } };
+  return {
+    props: {
+      ...getWeather,
+      location: getLocation.data,
+      getWeatherLoading: getWeather.loading,
+      getLocationLoading: getLocation.loading,
+    },
+  };
 };
 
 export default connect(mapStateToProps)(ForecastList);
