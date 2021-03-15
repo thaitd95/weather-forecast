@@ -99,9 +99,9 @@ const mapStateToProps = (state: any) => {
   return {
     props: {
       ...getWeather,
-      location: getLocation.data,
-      getWeatherLoading: getWeather.loading,
-      getLocationLoading: getLocation.loading,
+      location: getLocation?.data || [],
+      getWeatherLoading: getWeather?.loading || false,
+      getLocationLoading: getLocation?.loading || false,
     },
   };
 };
